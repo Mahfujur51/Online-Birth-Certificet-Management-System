@@ -24,7 +24,7 @@
         </div>
     </div>
 
-   
+    
 
     <!-- ***** Header Area Start ***** -->
     <header class="header_area" id="header">
@@ -39,16 +39,16 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                                 </li>
-                             
+                                
                                 <li class="nav-item">
                                     <a class="nav-link" href="user/login.php">User</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="admin/login.php">Admin</a>
                                 </li>
-                             
+                                
                             </ul>
-                         
+                            
                         </div>
                     </nav>
                 </div>
@@ -59,11 +59,11 @@
 
     <!-- ***** Hero Area Start ***** -->
     <div class="fancy-hero-area bg-img bg-overlay animated-img" style="background-image: url(img/bg-img/hero-1.jpg);">
-       
+     
     </div>
     <!-- ***** Hero Area End ***** -->
 
-  
+    
 
     <!-- ***** Footer Area Start ***** -->
     <footer class="fancy-footer-area fancy-bg-dark">
@@ -77,36 +77,36 @@
                             <!-- Copywrite Text -->
                             <div class="copywrite-text">
                                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Online Birth Certificate System @@ 2020
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                            <!-- Footer Nav -->
-                            <div class="footer-nav">
-                                <nav>
-                                    <ul>
-                                        <li><a href="index.php">Home</a></li>
-                                        <li><a href="admin/login.php">Admin</a></li>
-                                        <li><a href="user/login.php">User</a></li>
-                                      
-                                    </ul>
-                                </nav>
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> Online Birth Certificate System @ <?php  echo date('Y'); ?>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                                </div>
+                                <!-- Footer Nav -->
+                                <div class="footer-nav">
+                                    <nav>
+                                        <ul>
+                                            <li><a href="index.php">Home</a></li>
+                                            <li><a href="admin/login.php">Admin</a></li>
+                                            <li><a href="user/login.php">User</a></li>
+                                            
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- ***** Footer Area End ***** -->
+        </footer>
+        <!-- ***** Footer Area End ***** -->
 
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap-4 js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/others/plugins.js"></script>
-    <!-- Active JS -->
-    <script src="js/active.js"></script>
-</body>
+        <!-- jQuery-2.2.4 js -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="js/bootstrap/popper.min.js"></script>
+        <!-- Bootstrap-4 js -->
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <!-- All Plugins js -->
+        <script src="js/others/plugins.js"></script>
+        <!-- Active JS -->
+        <script src="js/active.js"></script>
+    </body>
