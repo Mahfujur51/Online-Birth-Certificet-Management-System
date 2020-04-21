@@ -19,27 +19,34 @@ if (strlen($_SESSION['obcsuid']==0)) {
         $postadd=$_POST['postadd'];
         $mobile=$_POST['mobile'];
         $email=$_POST['email'];
-        $sql="SELECT * FROM tbl_application WHERE fathername=''"
-        if ($LastInsertId>0) {
-            echo '<script>alert("Birth detail has been added.")</script>';
-            echo "<script>window.location.href ='fill-birthregform.php'</script>";
-        }
-        else
-        {
+        $sql="SELECT * FROM tbl_application WHERE fathername='$fathername' AND birth='$birth'";
+        $query=mysqli_query($con,$sql);
+        $num=mysqli_num_rows($query);
+        if ($num>0) {
+           echo "<script>alert('Date of Birth and Father Name is  already exist. Please try again');</script>";
+       }else{
+        $rsql="INSERT INTO tbl_application (userid,applicationid,birth,gender,fullname,place,fathername,paddress,postadd,mobile,email) VALUES('$userid','$applicationid','$birth','$gender','$fullname','$place','$fathername','$paddress','$postadd','$mobile','$email')";
+         $rquery=mysqli_query($con,$rsql);
+         if ($rquery) {
+             echo '<script>alert("Birth detail has been added.")</script>';
+             echo "<script>window.location.href ='fill-birthregform.php'</script>";
+
+         } else{
             echo '<script>alert("Something Went Wrong. Please try again")</script>';
+
         }
     }
-    else
-    {
-        echo "<script>alert('Date of Birth and Father Name is  already exist. Please try again');</script>";
-    }}
-    ?>
-    <!doctype html>
-    <html class="no-js" lang="en">
-    <head>
-        <title>Birth Certificate Form | Online Birth Certificate System</title>
-        
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+    
+}
+
+?>
+
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <title>Birth Certificate Form | Online Birth Certificate System</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
         <!-- Bootstrap CSS
             ============================================ -->
             <link rel="stylesheet" href="css/bootstrap.min.css">

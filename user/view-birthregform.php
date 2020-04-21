@@ -128,22 +128,7 @@ if (strlen($_SESSION['obcsuid']==0)) {
                                             </thead>
                                             <tbody>
                                                
-                                             
-                                              <?php
-                                            $uid= $_SESSION['obcsuid'];
-$sql="SELECT * from tblapplication where UserID=:uid";
-
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':uid', $uid, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
-                                                <tr>
+                                             <tr>
                                                     <td></td>
                                                     <td><?php echo htmlentities($cnt);?></td>
                                                     <td><?php  echo htmlentities($row->ApplicationID);?></td>
@@ -159,8 +144,7 @@ foreach($results as $row)
                                                     <td class="datatable-ct"><a href="view-application-detail.php?viewid=<?php echo htmlentities ($row->ID);?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                     </td>
                                                 </tr>
-                                             <?php $cnt=$cnt+1;}} ?>  
-                                            
+                                                                                   
                                             </tbody>
                                         </table>
                                     </div>
