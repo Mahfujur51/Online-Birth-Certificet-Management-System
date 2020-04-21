@@ -159,7 +159,7 @@ if (strlen($_SESSION['obcsuid']==0)) {
                                                                             <label class="login2 pull-right pull-right-pro">Full Name</label>
                                                                         </div>
                                                                         <div class="col-lg-9">
-                                                                            <input type="text" class="form-control" name="fname" value="" required="true" />
+                                                                            <input type="text" class="form-control" name="fullname" value="" required="true" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
