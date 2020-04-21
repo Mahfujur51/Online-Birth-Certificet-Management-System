@@ -92,7 +92,7 @@ if(isset($_POST['login']))
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="logo">
-                                                <h3 style="font-weight: bold;color: blue">OBCS</h3>
+                                                <h3 style="font-weight: bold;color: blue">Online Birth Certificet</h3>
                                             </div>
                                         </div>
                                     </div>
