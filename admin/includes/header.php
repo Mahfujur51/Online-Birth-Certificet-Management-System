@@ -41,14 +41,7 @@ if (strlen($_SESSION['obcsaid']==0)) {
                             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                 <div class="header-right-info">
                                     <ul class="nav navbar-nav mai-top-nav header-right-menu">
-                                 <?php 
-                        $sql ="SELECT * from  tblapplication where Status is null ";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$totneworder=$query->rowCount();
-?>
-                                        <li class="nav-item"><a href="new-birth-application.php" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="indicator-nt"></span></a>
+                                                               <li class="nav-item"><a href="new-birth-application.php" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="indicator-nt"></span></a>
                                             <div role="menu" class="notification-author dropdown-menu animated flipInX">
                                                 <div class="notification-single-top">
                                                     <h1>Notifications <?php echo htmlentities($totneworder);?></h1>
@@ -56,18 +49,14 @@ $totneworder=$query->rowCount();
                                                 <ul class="notification-menu">
                                                     <li>
                                                         <a href="new-birth-application.php">
-                                                             <?php
-foreach($results as $row)
-{ 
-
-  ?>
+                                                  
                                                            
                                                             <div class="notification-content">
                                                                 
                                                                 
                                                                 <h2><?php echo $row->ApplicationID;?></h2>
                                                                 <p><?php echo $row->Dateofapply;?>.</p>
-                                                                <?php  } ?>
+                                                              
                                                             </div>
                                                         </a>
                                                     </li>
@@ -80,21 +69,17 @@ foreach($results as $row)
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                <?php
-$aid=$_SESSION['obcsaid'];
-$sql="SELECT AdminName,Email from  tbladmin where ID=:aid";
-$query = $dbh -> prepare($sql);
-$query->bindParam(':aid',$aid,PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
+                                                <?php 
+                                                $id=$_SESSION['obcsaid'];
+                                                    $sql="SELECT * FROM tbl_admin WHERE id='$id'";
+                                                    $query=mysqli_query($con,$sql);
+                                                    $result=mysqli_fetch_array($query);
+
+                                                 ?>
+
                                                 <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
-                                                <span class="admin-name"><?php  echo $row->AdminName;?></span>
-                                                <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span><?php $cnt=$cnt+1;}} ?>
+                                                <span class="admin-name"><?php  echo $result['name'];?></span>
+                                                <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
                                             </a>
                                             <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
                                                 
