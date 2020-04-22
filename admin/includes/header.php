@@ -1,15 +1,15 @@
       <?php
-session_start();
-error_reporting(0);
-include('includes/dbconnection.php');
-if (strlen($_SESSION['obcsaid']==0)) {
-  header('location:logout.php');
-  } else{
+      session_start();
+      error_reporting(0);
+      include('includes/dbconnection.php');
+      if (strlen($_SESSION['obcsaid']==0)) {
+          header('location:logout.php');
+      } else{
 
 
 
-  ?>
- <div class="content-inner-all">
+          ?>
+          <div class="content-inner-all">
             <div class="header-top-area">
                 <div class="fixed-header-top">
                     <div class="container-fluid">
@@ -32,7 +32,7 @@ if (strlen($_SESSION['obcsaid']==0)) {
                                         </li>
                                         <li class="nav-item"><a href="between-dates-report.php" class="nav-link">Report</a>
                                         </li>
-                                       
+
                                         <li class="nav-item"><a href="search.php" class="nav-link">Search</a>
                                         </li>
                                     </ul>
@@ -41,61 +41,74 @@ if (strlen($_SESSION['obcsaid']==0)) {
                             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                 <div class="header-right-info">
                                     <ul class="nav navbar-nav mai-top-nav header-right-menu">
-                                                               <li class="nav-item"><a href="new-birth-application.php" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="indicator-nt"></span></a>
-                                            <div role="menu" class="notification-author dropdown-menu animated flipInX">
-                                                <div class="notification-single-top">
-                                                    <h1>Notifications <?php echo htmlentities($totneworder);?></h1>
-                                                </div>
-                                                <ul class="notification-menu">
-                                                    <li>
-                                                        <a href="new-birth-application.php">
-                                                  
-                                                           
-                                                            <div class="notification-content">
-                                                                
-                                                                
-                                                                <h2><?php echo $row->ApplicationID;?></h2>
-                                                                <p><?php echo $row->Dateofapply;?>.</p>
-                                                              
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                               
-                                                </ul>
-                                                <div class="notification-view">
-                                                    <a href="all-birth-application.php">View All Notification</a>
-                                                </div>
+                                     <li class="nav-item"><a href="new-birth-application.php" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="indicator-nt"></span></a>
+                                        <div role="menu" class="notification-author dropdown-menu animated flipInX">
+                                            <?php 
+
+                                            $nsql="SELECT * FROM tbl_application WHERE status=''";
+                                            $nquery=mysqli_query($con,$nsql);
+                                            $nrow=mysqli_num_rows($nquery);
+
+
+
+                                            ?>
+                                            <div class="notification-single-top">
+                                                <h1>Notifications <?php echo $nrow;?></h1>
                                             </div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                <?php 
-                                                $id=$_SESSION['obcsaid'];
-                                                    $sql="SELECT * FROM tbl_admin WHERE id='$id'";
-                                                    $query=mysqli_query($con,$sql);
-                                                    $result=mysqli_fetch_array($query);
+                                            <ul class="notification-menu">
+                                                <li>
+                                                    <a href="new-birth-application.php">
 
-                                                 ?>
 
-                                                <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
-                                                <span class="admin-name"><?php  echo $result['name'];?></span>
-                                                <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
-                                            </a>
-                                            <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
-                                                
-                                                <li><a href="profile.php"><span class="adminpro-icon adminpro-user-rounded author-log-ic"></span>My Profile</a>
-                                                </li>
-                                                 <li><a href="change-password.php"><span class="adminpro-icon adminpro-settings author-log-ic"></span>Settings</a>
-                                                </li>
-                                                <li><a href="logout.php"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
-                                                </li>
-                                            </ul>
+                                                        <div class="notification-content">
+                                                            <?php while ($nresult=mysqli_fetch_array($nquery)) {
+                                                                # code...
+                                                               ?> 
+
+                                                               <h2><?php echo $nresult['applicationid']; ?> </h2>
+                                                               <p><?php echo $nresult['applydate']; ?></p>
+                                                               <hr>
+                                                           <?php } ?>
+                                                       </div>
+                                                   </a>
+                                               </li>
+
+                                           </ul>
+                                           <div class="notification-view">
+                                            <a href="all-birth-application.php">View All Notification</a>
+                                        </div>
+
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                        <?php 
+                                        $id=$_SESSION['obcsaid'];
+                                        $sql="SELECT * FROM tbl_admin WHERE id='$id'";
+                                        $query=mysqli_query($con,$sql);
+                                        $result=mysqli_fetch_array($query);
+
+                                        ?>
+
+                                        <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
+                                        <span class="admin-name"><?php  echo $result['name'];?></span>
+                                        <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
+                                    </a>
+                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
+
+                                        <li><a href="profile.php"><span class="adminpro-icon adminpro-user-rounded author-log-ic"></span>My Profile</a>
                                         </li>
-                                   
+                                        <li><a href="change-password.php"><span class="adminpro-icon adminpro-settings author-log-ic"></span>Settings</a>
+                                        </li>
+                                        <li><a href="logout.php"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
+                                        </li>
                                     </ul>
-                                </div>
-                            </div>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div><?php }  ?>
+            </div>
+        </div>
+    </div><?php }  ?>
