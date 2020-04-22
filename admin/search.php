@@ -116,7 +116,7 @@ if (strlen($_SESSION['obcsaid']==0)) {
                                                                     <label class="login2 pull-right pull-right-pro">Search by Application Number</label>
                                                                 </div>
                                                                 <div class="col-lg-9">
-                                                                     <input id="searchdata" type="text" name="searchdata" required="true" class="form-control" placeholder="Application Number">
+                                                                     <input id="searchdata" type="text" name="applicationid" required="true" class="form-control" placeholder="Application Number">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -142,7 +142,7 @@ if (strlen($_SESSION['obcsaid']==0)) {
 if(isset($_POST['search']))
 { 
 
-$sdata=$_POST['searchdata'];
+$applicationid=$_POST['applicationid'];
   ?>
   <h4 align="center">Result against "<?php echo $sdata;?>" keyword </h4>
                                         <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
@@ -163,39 +163,36 @@ $sdata=$_POST['searchdata'];
                                              
                                               <?php
                                           
-$sql="SELECT * from tblapplication where ApplicationID like '$sdata%'";
-
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
-                                                <tr>
-                                                    <td></td>
-                                                    <td><?php echo htmlentities($cnt);?></td>
-                                                    <td><?php  echo htmlentities($row->ApplicationID);?></td>
-                                                    <td><?php  echo htmlentities($row->FullName);?></td>
-                                                   <td><?php  echo htmlentities($row->MobileNumber);?></td>
-                                                    <td><?php  echo htmlentities($row->MobileNumber);?></td>
-                                                  <?php if($row->Status==""){ ?>
+$sql="SELECT * FROM  tbl_application WHERE applicationid LIKE '%$applicationid%'";
+$query=mysqli_query($con,$sql);
+$num=mysqli_num_rows($query);
+if ($num>0) {
+    $cont=1;
+    while ($result=mysqli_fetch_array($query)) {
+        # code...
+  
+?>                            <td></td>
+                                                    <td><?php echo htmlentities($cont);?></td>
+                                                    <td><?php  echo htmlentities($result['applicationid']);?></td>
+                                                    <td><?php  echo htmlentities($result['fullname']);?></td>
+                                                   <td><?php  echo htmlentities($result['mobile']);?></td>
+                                                    <td><?php  echo htmlentities($result['fathername']);?></td>
+                                                  <?php if($result['status']==""){ ?>
 
                      <td><?php echo "Still Pending"; ?></td>
-<?php } else { ?>                  <td><?php  echo htmlentities($row->Status);?>
+<?php } else { ?>                  <td><?php  echo htmlentities($result['status']);?>
                   </td>
                   <?php } ?>
-                                                    <td class="datatable-ct"><a href="view-application-detail.php?viewid=<?php echo htmlentities ($row->ID);?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    <td class="datatable-ct"><a href="view-application-detail.php?viewid=<?php echo htmlentities ($result['id']);?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                     </td>
                                                 </tr>
                                              
                                             
                                             </tbody>
                                             <?php 
-$cnt=$cnt+1;
-} } else { ?>
+                                            $cont++;
+  }
+} else { ?>
   <tr>
     <td colspan="8"> No record found against this search</td>
 
