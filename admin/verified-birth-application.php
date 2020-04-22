@@ -129,37 +129,35 @@ if (strlen($_SESSION['obcsaid']==0)) {
                                             <tbody>
                                                
                                              
-                                              <?php
-                                          
-$sql="SELECT * from tblapplication where Status='Verified'";
-
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
-                                                <tr>
-                                                    <td></td>
-                                                    <td><?php echo htmlentities($cnt);?></td>
-                                                    <td><?php  echo htmlentities($row->ApplicationID);?></td>
-                                                    <td><?php  echo htmlentities($row->FullName);?></td>
-                                                   <td><?php  echo htmlentities($row->MobileNumber);?></td>
-                                                    <td><?php  echo htmlentities($row->MobileNumber);?></td>
-                                                  <?php if($row->Status==""){ ?>
-
-                     <td><?php echo "Still Pending"; ?></td>
-<?php } else { ?>                  <td><?php  echo htmlentities($row->Status);?>
-                  </td>
-                  <?php } ?>
-                                                    <td class="datatable-ct"><a href="view-application-detail.php?viewid=<?php echo htmlentities ($row->ID);?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                    </td>
-                                                </tr>
-                                             <?php $cnt=$cnt+1;}} ?>  
-                                            
+                                          <?php
+                                        
+                                        $sql="SELECT * FROM tbl_application WHERE status='Verified'";
+                                        $query=mysqli_query($con,$sql);
+                                        $num=mysqli_num_rows($query);
+                                        if ($num>0) {
+                                            $cont=1;
+                                            while ($result=mysqli_fetch_array($query)) {
+                                         
+                                        ?>
+                                        <tr>
+                                            <td></td>
+                                            <td><?php echo htmlentities($cont);?></td>
+                                            <td><?php  echo htmlentities($result['applicationid']);?></td>
+                                            <td><?php  echo htmlentities($result['fullname']);?></td>
+                                            <td><?php  echo htmlentities($result['mobile']);?></td>
+                                            <td><?php  echo htmlentities($result['fathername']);?></td>
+                                            <?php if($result['status']==""){ ?>
+                                            <td><?php echo "Still Pending"; ?></td>
+                                            <?php } else { ?>                  <td><?php  echo htmlentities($result['status']);?>
+                                            </td>
+                                            <?php } ?>
+                                            <td class="datatable-ct"><a href="view-application-detail.php?viewid=<?php echo htmlentities ($result['id']);?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <?php $cont++;}}else{
+                                        echo " NO Record Found!!!";
+                                    } ?>
+                                    
                                             </tbody>
                                         </table>
                                     </div>

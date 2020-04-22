@@ -2,41 +2,44 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
-if(isset($_POST['login']))
-{
-    $username=$_POST['username'];
-    $password=md5($_POST['password']);
-    $sql="SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
-    $query=mysqli_query($con,$sql);
-    $num=mysqli_num_rows($query);
-    if ($num>0) {
-        while ($result=mysqli_fetch_array($query)) {
-            $_SESSION['obcsaid']=$result['id'];
-            if (!empty($_POST['remember'])) {
-                setcookie ("user_login",$_POST["username"],time()+ (10 * 365 * 24 * 60 * 60));
+if (!strlen($_SESSION['obcsaid']==0)) {
+  header('location:dashboard.php');
+} else{
+    if(isset($_POST['login']))
+    {
+        $username=$_POST['username'];
+        $password=md5($_POST['password']);
+        $sql="SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
+        $query=mysqli_query($con,$sql);
+        $num=mysqli_num_rows($query);
+        if ($num>0) {
+            while ($result=mysqli_fetch_array($query)) {
+                $_SESSION['obcsaid']=$result['id'];
+                if (!empty($_POST['remember'])) {
+                    setcookie ("user_login",$_POST["username"],time()+ (10 * 365 * 24 * 60 * 60));
 //COOKIES for password
-                setcookie ("userpassword",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
+                    setcookie ("userpassword",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
 
-            } else{
-                if (isset($_COOKIE['user_login'])) {
-                    setcookie("user_login","");
-                    if (isset($_COOKIE['userpassword'])) {
-                        setcookie ("userpassword","");
+                } else{
+                    if (isset($_COOKIE['user_login'])) {
+                        setcookie("user_login","");
+                        if (isset($_COOKIE['userpassword'])) {
+                            setcookie ("userpassword","");
+                        }
                     }
                 }
+                $_SESSION['login']=$username;
+                echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
             }
-            $_SESSION['login']=$username;
-            echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
+        } else{
+            echo "<script>alert('Invalid Details');</script>";
         }
-    } else{
-        echo "<script>alert('Invalid Details');</script>";
     }
-}
-?>
-<!doctype html>
-<html class="no-js" lang="en">
-<head>
-    <title>Login | Online Birth Certificate System</title>
+    ?>
+    <!doctype html>
+    <html class="no-js" lang="en">
+    <head>
+        <title>Login | Online Birth Certificate System</title>
         <!-- Google Fonts
             ============================================ -->
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
@@ -91,7 +94,7 @@ if(isset($_POST['login']))
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="logo">
-                                            <h3 style="font-weight: bold;color: blue">OBCS</h3>
+                                            <h3 style="font-weight: bold;color: blue">Online Birth Certificet</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -193,3 +196,4 @@ if(isset($_POST['login']))
         <script src="js/main.js"></script>
     </body>
     </html>
+    <?php } ?>
